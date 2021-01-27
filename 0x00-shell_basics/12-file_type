@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "$(ls --file-type [../tmp/iamafile])/$line
