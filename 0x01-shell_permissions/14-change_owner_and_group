@@ -1,0 +1,2 @@
+#!/bin/bash
+chown -R betty:holberton /root/alx-system_engineering-devops/0x01-shell_permissions
