@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(cd home)/$line"
+cd $HOME/$line

@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(ls -a -l)/$line"
+ls -a
