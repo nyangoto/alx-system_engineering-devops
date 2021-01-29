@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(rm /../tmp/holberton/betty)/$line"
+rm /tmp/holberton/betty
