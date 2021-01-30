@@ -1,0 +1,1 @@
+This directory contains shell and bash scripts that perform various operations and they're aptly named to that effect.
