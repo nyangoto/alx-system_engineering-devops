@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(ls | grep -E '^[0-9]+$')/$line
+ls -lan

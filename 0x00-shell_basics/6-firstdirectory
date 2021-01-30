@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(mkdir /../tmp/holberton/)/$line"
+mkdir /tmp/holberton
