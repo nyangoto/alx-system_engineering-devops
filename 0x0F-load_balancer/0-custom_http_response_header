@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Installs Nginx on server and configures it's HTTP response to contain a custom header
+# indicating the host noma.
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+#get hostname
+host=$HOSTNAME
+
+#customize header response
+new_h="\\\tadd_header X-Served-By $host;"
+sudo sed -i "36i $new_h" /etc/nginx/sites-available/default
+
+# restatrt NGINX server
+sudo service nginx restart
