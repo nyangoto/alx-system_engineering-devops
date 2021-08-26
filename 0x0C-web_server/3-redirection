@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-# Script to install nginx on server
+# Install nginx, set up to listen to port 80 and change default page served to
+# "Holberton School"
+# Configure Nginx server so that /redirect_me is redirecting to another page
 
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
 
-echo "Holberton School for the win!" >> /var/www/html/index.html
-
-sed -i '38i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-sudo service nginx start
+# configure redirection
+new_str="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUl\
+wu4 permanent;"
+sudo sed -i "42i $new_str" /etc/nginx/sites-available/default
+sudo service nginx restart
