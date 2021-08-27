@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
-# Installs Nginx on server and configures it's HTTP response to contain a custom header
-# indicating the host noma.
-
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-
-#get hostname
-host=$HOSTNAME
-
-#customize header response
-new_h="\\\tadd_header X-Served-By $host;"
-sudo sed -i "36i $new_h" /etc/nginx/sites-available/default
-
-# restatrt NGINX server
-sudo service nginx restart
+# installs nginx
+apt-get -y update
+apt-get -y install nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+sed -i "/server_name _;/ a\\\trewrite ^/redirect_me http://www.holbertonschool.com permanent;" /etc/nginx/sites-available/default
+sed -i "/server_name _;/ a\\\tadd_header X-Served-By \"\$HOSTNAME\";" /etc/nginx/sites-available/default
+sed -i "/redirect_me/ a\\\terror_page 404 /custom_404.html;" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+service nginx start
