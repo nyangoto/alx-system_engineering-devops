@@ -1,8 +1,23 @@
 #!/usr/bin/env bash
-# Digs domain and option subdomain
-if [ $# -eq 1 ]; then
-	domains="www.$1 lb-01.$1 web-01.$1 web-02.$1"
+# Dsplays info about domain and subdomain.
+
+records ()
+{
+record="$(dig ${2}.${1} | awk 'NR==14 { print $4 }')"
+
+IP="$(dig ${2}.${1} | awk 'NR==14 { print $5 }')"
+
+echo "The subdomain $2 is a $record record and points to $IP"
+}
+
+
+# Check number of arguments passed to script
+if [ "$#" -ne 2 ];
+then
+    records $1 "www"
+    records $1 "lb-01"
+    records $1 "web-01"
+    records $1 "web-02"
 else
-	domains="$2.$1"
+    records $1 $2
 fi
-dig $domains | awk '/ANSWER SECTION:/ { getline; split($1, a, "."); print "The subdomain", a[1], "is a", $4, "record and points to", $5}'
